@@ -6,6 +6,12 @@ const input = {
   name: "Celular",
   price: 1500
 };
+
+const inputType = {
+  type: "c",
+  name: "Celular",
+  price: 1500
+};
   
 const MockRepository = () => {
     return {
@@ -27,5 +33,14 @@ describe("Unit test create product use case", ()=>{
       name: input.name,
       price: input.price
     });
+  });
+
+  it("should throw an error when type of product is not supported", async () => {
+    const productRepository = MockRepository();
+    const productCreateUseCase = new CreateProductUseCase(productRepository);
+
+    await expect(productCreateUseCase.execute(inputType)).rejects.toThrow(
+      "Product type not supported"
+    );
   });
 });
