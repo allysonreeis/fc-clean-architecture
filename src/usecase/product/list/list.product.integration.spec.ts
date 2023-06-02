@@ -10,7 +10,7 @@ const product1 = ProductFactory.create("a", "notebook", 5000);
 const product2 = ProductFactory.create("b", "Fone", 250);
 
 
-describe("Test create product use case", () => {
+describe("Test list product use case", () => {
     let sequelize: Sequelize;
 
     beforeEach(async () => {
