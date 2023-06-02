@@ -2,19 +2,16 @@ import { Sequelize } from "sequelize-typescript";
 import ProductModel from "../../../infrastructure/product/repository/sequelize/product.model";
 import ProductRepository from "../../../infrastructure/product/repository/sequelize/product.repository";
 import CreateProductUseCase from "./create.product.usecase";
+import ProductFactory from "../../../domain/product/factory/product.factory";
+import Product from "../../../domain/product/entity/product";
 
 
-const input = {
-    type: "a",
+const product = {
+    id: "1",
     name: "Celular",
     price: 1500
 };
 
-const inputType = {
-    type: "c",
-    name: "Celular",
-    price: 1500
-};
 
 describe("Test create product use case", () => {
     let sequelize: Sequelize;
@@ -39,20 +36,11 @@ describe("Test create product use case", () => {
         const productRepository = new ProductRepository();
         const productCreateUseCase = new CreateProductUseCase(productRepository);
     
-        const output = await productCreateUseCase.execute(input);
+        const output = await productCreateUseCase.execute(product as Product);
         expect(output).toEqual({
           id: expect.any(String),
-          name: input.name,
-          price: input.price
+          name: product.name,
+          price: product.price
         });
-      });
-    
-      it("should throw an error when type of product is not supported", async () => {
-        const productRepository = new ProductRepository();
-        const productCreateUseCase = new CreateProductUseCase(productRepository);
-    
-        await expect(productCreateUseCase.execute(inputType)).rejects.toThrow(
-          "Product type not supported"
-        );
       });
 });
