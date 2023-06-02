@@ -1,11 +1,9 @@
-export interface InputListProductDto {}
-
-type Product = {
+export interface OutputProductDto {
   id: string;
   name: string;
   price: number;
 };
 
 export interface OutputListProductDto {
-  products: Product[];
+  products: OutputProductDto[];
 }
